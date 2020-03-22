@@ -1,10 +1,19 @@
-import React, {useState,useEffect} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import RNRestart from 'react-native-restart';
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ImageBackground,
+  Image,
+  TouchableOpacity
+} from "react-native";
+import RNRestart from "react-native-restart";
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Selection/>
+      <Selection />
     </View>
   );
 }
@@ -13,58 +22,131 @@ const Selection = () => {
   //const [showP2, setShowP2] = useState(false);
   const [p1choice, setP1choice] = useState(0);
   const [showAnimation, setShowAnimation] = useState(true);
-  const selectables = [
-    "paper",
-    "rock",
-    "scissors"
-  ]
+  const selectables = ["rock", "paper", "scissors"];
   const handleButtonClick = () => {
-     setShowAnimation(false)
-     }
-  const choices = selectables.map(choice => (
-    <Button title={choice} onPress={() => {handleButtonClick();setP1choice(choice)}}/>
-  ))
+    setShowAnimation(false);
+  };
+  // const choices = selectables.map(choice => (
+  //   <Button
+  //     title={choice}
+  //     onPress={() => {
+  //       handleButtonClick();
+  //       setP1choice(choice);
+  //     }}
+  //   />
+  // ));
   const compChoice = selectables[Math.floor(Math.random() * 3)];
-  
-    return(
-      <View>
-        {showAnimation?
-        <View>
-          <Text>Select your choice!</Text>
-          {choices}
-        </View>: <AnimationScreen p1choice={p1choice} compChoice={compChoice}/>}
-      </View>
-    )
-}
 
-const AnimationScreen = (props) => {
+  return (
+    <ImageBackground
+      source={
+        "https://cache.desktopnexus.com/thumbseg/503/503557-bigthumbnail.jpg"
+      }
+      style={{ width: "100%", height: "100%" }}
+    >
+      {showAnimation ? (
+        <View>
+          <Text
+            style={{ textAlign: "center", fontSize: "20px", color: "white" }}
+          >
+            Hey there Player!
+          </Text>
+          <Text style={h1.headertext}>Select your choice!</Text>
+          <View
+            style={{
+              width: "150px",
+              marginLeft: "110px"
+            }}
+          >
+            <Button
+              title={selectables[0]}
+              onPress={() => {
+                handleButtonClick();
+                setP1choice(selectables[0]);
+              }}
+            ></Button>
+          </View>
+          <View
+            style={{ marginTop: "30px", width: "150px", marginLeft: "110px" }}
+          >
+            <Button
+              title={selectables[1]}
+              onPress={() => {
+                handleButtonClick();
+                setP1choice(selectables[1]);
+              }}
+            ></Button>
+          </View>
+          <View
+            style={{ marginTop: "30px", width: "150px", marginLeft: "110px" }}
+          >
+            <Button
+              title={selectables[2]}
+              onPress={() => {
+                handleButtonClick();
+                setP1choice(selectables[2]);
+              }}
+            ></Button>
+          </View>
+        </View>
+      ) : (
+        <AnimationScreen p1choice={p1choice} compChoice={compChoice} />
+      )}
+    </ImageBackground>
+  );
+};
+
+const AnimationScreen = props => {
   //images for scissors rock & paper
   console.log(props);
   const [showResult, setShowResult] = useState(false);
-  return(
+  return (
     <View>
-      {showResult?<ResultScreen p1choice={props.p1choice} compChoice={props.compChoice}/>:<Button title="Check Result" onPress={()=>{setShowResult(true)}}/>}
+      {showResult ? (
+        <ResultScreen p1choice={props.p1choice} compChoice={props.compChoice} />
+      ) : (
+        <Button
+          title="Check Result"
+          onPress={() => {
+            setShowResult(true);
+          }}
+        />
+      )}
     </View>
-  )
-}
+  );
+};
 
-const ResultScreen = ({p1choice, compChoice}) => {
+const ResultScreen = ({ p1choice, compChoice }) => {
   console.log(p1choice);
-  return(
+  return (
     <View>
-    <Text>{p1choice}</Text> 
-    <Button onPress={()=>{RNRestart.Restart();}} title="Play Again"/>
+      <Text>{p1choice}</Text>
+      <Button
+        onPress={() => {
+          RNRestart.Restart();
+        }}
+        title="Play Again"
+      />
     </View>
-  )
-}
+  );
+};
 // selection screen // animation audio screen // results screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
+
+const h1 = StyleSheet.create({
+  headertext: {
+    fontSize: "40px",
+    textAlign: "center",
+    paddingBottom: "100px",
+    color: "white"
+  }
 });
 /*
 const Rps = () =>{
