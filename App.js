@@ -3,12 +3,21 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   ImageBackground,
+  Button,
   Image,
   TouchableOpacity
 } from "react-native";
 import RNRestart from "react-native-restart";
+import {
+  Provider as PaperProvider,
+  Appbar,
+  Card,
+  Title,
+  Paragraph,
+  Avatar,
+  Button as Button2
+} from "react-native-paper";
 
 export default function App() {
   return (
@@ -39,23 +48,26 @@ const Selection = () => {
 
   return (
     <ImageBackground
-      source={
-        "https://cache.desktopnexus.com/thumbseg/503/503557-bigthumbnail.jpg"
-      }
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", backgroundColor: "lightblue" }}
     >
       {showAnimation ? (
-        <View>
-          <Text
-            style={{ textAlign: "center", fontSize: "20px", color: "white" }}
+        <PaperProvider>
+          <Appbar.Header
+            style={{ position: "relative", backgroundColor: "black" }}
           >
-            Hey there Player!
-          </Text>
+            <Appbar.Content
+              title="Namaste Khiladi"
+              style={{ position: "absolute", left: "26%" }}
+            />
+          </Appbar.Header>
+
           <Text style={h1.headertext}>Select your choice!</Text>
           <View
             style={{
-              width: "150px",
-              marginLeft: "110px"
+              position: "absolute",
+              top: "38%",
+              left: "33%",
+              width: "150px"
             }}
           >
             <Button
@@ -67,7 +79,12 @@ const Selection = () => {
             ></Button>
           </View>
           <View
-            style={{ marginTop: "30px", width: "150px", marginLeft: "110px" }}
+            style={{
+              position: "absolute",
+              top: "53%",
+              left: "33%",
+              width: "150px"
+            }}
           >
             <Button
               title={selectables[1]}
@@ -78,7 +95,12 @@ const Selection = () => {
             ></Button>
           </View>
           <View
-            style={{ marginTop: "30px", width: "150px", marginLeft: "110px" }}
+            style={{
+              position: "absolute",
+              top: "70%",
+              left: "33%",
+              width: "150px"
+            }}
           >
             <Button
               title={selectables[2]}
@@ -88,7 +110,7 @@ const Selection = () => {
               }}
             ></Button>
           </View>
-        </View>
+        </PaperProvider>
       ) : (
         <AnimationScreen p1choice={p1choice} compChoice={compChoice} />
       )}
@@ -100,26 +122,82 @@ const AnimationScreen = props => {
   //images for scissors rock & paper
   console.log(props);
   const [showResult, setShowResult] = useState(false);
+  var mottos = [
+    "If you want to achieve greatness stop asking for permission.",
+    "Things work out best for those who make the best of how things work out.",
+    "To live a creative life, we must lose our fear of being wrong.",
+    "Trust because you are willing to accept the risk, not because it's safe or certain.",
+    "Just when the caterpillar thought the world was ending, he turned into a butterfly.",
+    "Great minds discuss ideas; average minds discuss events; small minds discuss people.",
+    "A successful man is one who can lay a firm foundation with the bricks others have thrown at him.",
+    "The ones who are crazy enough to think they can change the world, are the ones who do.",
+    "The meaning of life is to find your gift. The purpose of life is to give it away."
+  ];
+
+  const randomMotto = mottos[Math.floor(Math.random() * mottos.length)];
   return (
-    <View>
+    <PaperProvider>
       {showResult ? (
         <ResultScreen p1choice={props.p1choice} compChoice={props.compChoice} />
       ) : (
-        <Button
-          title="Check Result"
-          onPress={() => {
-            setShowResult(true);
-          }}
-        />
+        <View>
+          <Appbar.Header
+            style={{ position: "relative", backgroundColor: "black" }}
+          >
+            <Appbar.Content
+              title="Waiting Section"
+              style={{ position: "absolute", left: "26%" }}
+            />
+          </Appbar.Header>
+          <Card
+            style={{
+              marginTop: "130px",
+              position: "relative",
+              width: "100%",
+              padding: "10px",
+              height: "230px"
+            }}
+          >
+            <Avatar.Image
+              style={{ position: "absolute", left: "35%" }}
+              size={114}
+              source={
+                "https://1.bp.blogspot.com/-c6JkYb7CMYk/VCs9OoGlvrI/AAAAAAAAAsY/pk05iUDSc4w/s1600/anzai-sensei.png"
+              }
+            />
+            <Card.Content style={{ position: "absolute", top: "67%" }}>
+              <Paragraph style={{ textAlign: "center", fontWeight: "900" }}>
+                {randomMotto}
+              </Paragraph>
+            </Card.Content>
+          </Card>
+          <Button2
+            style={{
+              width: "200px",
+              position: "absolute",
+              left: "26%",
+              marginTop: "450px"
+            }}
+            mode="contained"
+            onPress={() => {
+              setShowResult(true);
+            }}
+          >
+            Check Result
+          </Button2>
+        </View>
       )}
-    </View>
+    </PaperProvider>
   );
 };
 
 const ResultScreen = ({ p1choice, compChoice }) => {
   console.log(p1choice);
   return (
-    <View>
+    <PaperProvider>
+      <Appbar.Header dark={true}>
+        <Appbar.Content title="Title" />
+      </Appbar.Header>
       <Text>{p1choice}</Text>
       <Button
         onPress={() => {
@@ -127,7 +205,7 @@ const ResultScreen = ({ p1choice, compChoice }) => {
         }}
         title="Play Again"
       />
-    </View>
+    </PaperProvider>
   );
 };
 // selection screen // animation audio screen // results screen
@@ -144,8 +222,8 @@ const h1 = StyleSheet.create({
   headertext: {
     fontSize: "40px",
     textAlign: "center",
-    paddingBottom: "100px",
-    color: "white"
+
+    color: "black"
   }
 });
 /*
