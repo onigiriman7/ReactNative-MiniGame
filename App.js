@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import CountDown from "react-native-countdown-component";
-
 import {
   StyleSheet,
   Text,
@@ -63,7 +62,6 @@ const Selection = () => {
             />
           </Appbar.Header>
 
-          <Text style={h1.headertext}>Select your choice!</Text>
           <View
             style={{
               position: "absolute",
@@ -242,14 +240,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const h1 = StyleSheet.create({
-  headertext: {
-    fontSize: "40px",
-    textAlign: "center",
-
-    color: "black"
-  }
-});
 /*
 const Rps = () =>{
   const selectables = [
