@@ -63,7 +63,7 @@ const Selection = () => {
             />
           </Appbar.Header>
 
-          <Text style={h1.headertext}>Select your choice!</Text>
+          <Text>}>Select your choice!</Text>
           <View
             style={{
               position: "absolute",
@@ -242,14 +242,14 @@ const styles = StyleSheet.create({
   }
 });
 
-const h1 = StyleSheet.create({
-  headertext: {
-    fontSize: "40px",
-    textAlign: "center",
+// const h1 = StyleSheet.create({
+//   headertext: {
+//     fontSize: 40,
+//     textAlign: "center",
 
-    color: "black"
-  }
-});
+//     color: "black"
+//   }
+// });
 /*
 const Rps = () =>{
   const selectables = [
