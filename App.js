@@ -212,7 +212,8 @@ const AnimationScreen = props => {
     </PaperProvider>
   );
 };
-
+//-----------------------------DONT CHANGE ANYTHING BELOW
+//-----------------------------------------------------------------------------------------------------------------------
 const ResultScreen = ({ p1choice, compChoice }) => {
   console.log(p1choice);
   var result;
