@@ -53,68 +53,98 @@ const Selection = () => {
     >
       {showAnimation ? (
         <PaperProvider>
-          <Appbar.Header
-            style={{ position: "relative", backgroundColor: "black" }}
-          >
-            <Appbar.Content
-              title="Namaste Khiladi"
-              style={{ position: "absolute", left: "26%" }}
-            />
-          </Appbar.Header>
+          <Text style={{ textAlign: "center", fontSize: 20 }}>
+            Hey! It's Your Turn
+          </Text>
+          <Text style={{ textAlign: "center", fontSize: 40 }}>
+            Select Your Choice!!
+          </Text>
 
-          <View
+          <Button2
+            icon={() => (
+              <Image
+                source={
+                  "https://www.stickpng.com/assets/images/580b585b2edbce24c47b26f6.png"
+                }
+                style={{
+                  width: "260px",
+                  height: "150px",
+                  marginLeft: "-110px"
+                }}
+              />
+            )}
             style={{
               position: "absolute",
-              top: "38%",
+              top: "18%",
+              left: "15%",
+              width: "260px"
+            }}
+            onPress={() => {
+              handleButtonClick();
+              setP1choice(selectables[0]);
+            }}
+          ></Button2>
+
+          <Button2
+            icon={() => (
+              <Image
+                source={
+                  "https://previews.123rf.com/images/pitju/pitju1608/pitju160800028/61460939-curled-paper-corner-a4-format-with-transparent-background-for-shet-of-paper-page-design-with-curled-.jpg"
+                }
+                style={{
+                  width: "250px",
+                  height: "170px",
+                  marginLeft: "-108px"
+                }}
+              />
+            )}
+            style={{
+              position: "absolute",
+              top: "49%",
               left: "33%",
               width: "150px"
             }}
+            onPress={() => {
+              handleButtonClick();
+              setP1choice(selectables[1]);
+            }}
           >
-            <Button
-              title={selectables[0]}
-              onPress={() => {
-                handleButtonClick();
-                setP1choice(selectables[0]);
-              }}
-            ></Button>
-          </View>
-          <View
+            {" "}
+          </Button2>
+
+          <Button2
+            icon={() => (
+              <Image
+                source={
+                  "https://lh3.googleusercontent.com/proxy/jckHYSg3qMej-p9oFGMg02EBwyt3Pg62a669-LwC2oIGqpub4HbCuUZ-qULhwfzgajoWJB6SqAUTyqYB9Jwdqk0qpl9CR88ePKV5ucsKhBV_N9ykeiK5m55cyWVC03jc"
+                }
+                style={{
+                  width: "250px",
+                  height: "170px",
+                  marginLeft: "-108px"
+                }}
+              />
+            )}
             style={{
               position: "absolute",
-              top: "53%",
+              top: "77%",
               left: "33%",
               width: "150px"
             }}
-          >
-            <Button
-              title={selectables[1]}
-              onPress={() => {
-                handleButtonClick();
-                setP1choice(selectables[1]);
-              }}
-            ></Button>
-          </View>
-          <View
-            style={{
-              position: "absolute",
-              top: "70%",
-              left: "33%",
-              width: "150px"
+            onPress={() => {
+              handleButtonClick();
+              setP1choice(selectables[2]);
             }}
-          >
-            <Button
-              title={selectables[2]}
-              onPress={() => {
-                handleButtonClick();
-                setP1choice(selectables[2]);
-              }}
-            ></Button>
-          </View>
+          ></Button2>
         </PaperProvider>
       ) : (
-        <AnimationScreen p1choice={p1choice} compChoice={compChoice} reset={()=>{
-          setShowAnimation(true);
-        }}/>
+        <AnimationScreen
+          p1choice={p1choice}
+          compChoice={compChoice}
+          reset={() => {
+            setShowAnimation(true);
+          }}
+        />
       )}
     </ImageBackground>
   );
@@ -122,14 +152,14 @@ const Selection = () => {
 
 const AnimationScreen = props => {
   //images for scissors rock & paper
-  console.log(props);
+
   const [showResult, setShowResult] = useState(false);
   const timer = () => {
     setTimeout(() => {
       setShowResult(true);
-    }, 3000);
+    }, 1000);
   };
- 
+
   var mottos = [
     "If you want to achieve greatness stop asking for permission.",
     "Things work out best for those who make the best of how things work out.",
@@ -146,20 +176,16 @@ const AnimationScreen = props => {
   return (
     <PaperProvider>
       {showResult ? (
-        <ResultScreen p1choice={props.p1choice} compChoice={props.compChoice} reset={props.reset}
-        goback={()=>{
-          setShowResult(false);
-        }}/>
+        <ResultScreen
+          p1choice={props.p1choice}
+          compChoice={props.compChoice}
+          reset={props.reset}
+          goback={() => {
+            setShowResult(false);
+          }}
+        />
       ) : (
         <View>
-          <Appbar.Header
-            style={{ position: "relative", backgroundColor: "black" }}
-          >
-            <Appbar.Content
-              title="Waiting Section"
-              style={{ position: "absolute", left: "26%" }}
-            />
-          </Appbar.Header>
           <Card
             style={{
               marginTop: "130px",
@@ -203,44 +229,47 @@ const AnimationScreen = props => {
 };
 //-----------------------------DONT CHANGE ANYTHING BELOW
 //-----------------------------------------------------------------------------------------------------------------------
-const ResultScreen = (props) => {
-  console.log(props);
+const ResultScreen = props => {
   var player = props.p1choice;
   var comp = props.compChoice;
-  var resultTexts = ["DRAW","Player wins", "Computer Wins"];
-  
-  var result = () =>{
-    if(player===comp){
+  var resultTexts = ["DRAW", "Player wins", "Computer Wins"];
+
+  var result = () => {
+    if (player === comp) {
       return 0;
-    }
-    else{
-      switch(player){
+    } else {
+      switch (player) {
         case "paper":
-          return (comp==="rock"?1:2);
-         
+          return comp === "rock" ? 1 : 2;
+
         case "rock":
-          return (comp==="scissors"?1:2);
-          
+          return comp === "scissors" ? 1 : 2;
+
         case "scissors":
-          return (comp==="paper"?1:2);
+          return comp === "paper" ? 1 : 2;
       }
     }
   };
   return (
-    <PaperProvider>
-      <Appbar.Header dark={true}>
-        <Appbar.Content title="Title" />
-      </Appbar.Header>
-      <Text>{resultTexts[result()]}</Text>
-      <Button
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text style={{ textAlign: "center", fontSize: 24 }}>
+        You selected: {player}
+      </Text>
+      <Text style={{ textAlign: "center", fontSize: 70, fontStyle: "italic" }}>
+        {resultTexts[result()]}
+      </Text>
+      <Text style={{ textAlign: "center", marginTop: "20px", fontSize: 24 }}>
+        Computer selected: {comp}
+      </Text>
+      <Button2
+        style={{ position: "absolute", top: "74%", backgroundColor: "white" }}
         onPress={() => {
           props.reset();
         }}
-        title="Play Again"
-      />
-      <Text>You selected: {player}</Text>
-      <Text>Computer selected: {comp}</Text>
-    </PaperProvider>
+      >
+        Play Again
+      </Button2>
+    </View>
   );
 };
 // selection screen // animation audio screen // results screen
