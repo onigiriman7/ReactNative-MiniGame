@@ -205,19 +205,41 @@ const AnimationScreen = props => {
 //-----------------------------------------------------------------------------------------------------------------------
 const ResultScreen = (props) => {
   console.log(props);
-  var result;
+  var player = props.p1choice;
+  var comp = props.compChoice;
+  var resultTexts = ["DRAW","Player wins", "Computer Wins"];
+  
+  var result = () =>{
+    if(player===comp){
+      return 0;
+    }
+    else{
+      switch(player){
+        case "paper":
+          return (comp==="rock"?1:2);
+         
+        case "rock":
+          return (comp==="scissors"?1:2);
+          
+        case "scissors":
+          return (comp==="paper"?1:2);
+      }
+    }
+  };
   return (
     <PaperProvider>
       <Appbar.Header dark={true}>
         <Appbar.Content title="Title" />
       </Appbar.Header>
-      <Text>{props.p1choice}</Text>
+      <Text>{resultTexts[result()]}</Text>
       <Button
         onPress={() => {
           props.reset();
         }}
         title="Play Again"
       />
+      <Text>You selected: {player}</Text>
+      <Text>Computer selected: {comp}</Text>
     </PaperProvider>
   );
 };
