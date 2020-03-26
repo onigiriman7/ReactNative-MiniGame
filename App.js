@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import CountDown from "react-native-countdown-component";
+
 import {
   StyleSheet,
   Text,
@@ -122,6 +124,26 @@ const AnimationScreen = props => {
   //images for scissors rock & paper
   console.log(props);
   const [showResult, setShowResult] = useState(false);
+  const timer = () => {
+    setTimeout(() => {
+      setShowResult(true);
+    }, 3000);
+  };
+  const timer2 = () => {
+    return (
+      <View>
+        <CountDown
+          until={4}
+          size={30}
+          onFinish={() => alert("Finished")}
+          digitStyle={{ backgroundColor: "#FFF" }}
+          digitTxtStyle={{ color: "#1CC625" }}
+          timeToShow={["S"]}
+          timeLabels={{ s: "SS" }}
+        />
+      </View>
+    );
+  };
   var mottos = [
     "If you want to achieve greatness stop asking for permission.",
     "Things work out best for those who make the best of how things work out.",
@@ -180,7 +202,7 @@ const AnimationScreen = props => {
             }}
             mode="contained"
             onPress={() => {
-              setShowResult(true);
+              timer();
             }}
           >
             Check Result
