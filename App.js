@@ -114,7 +114,9 @@ const Selection = () => {
           </View>
         </PaperProvider>
       ) : (
-        <AnimationScreen p1choice={p1choice} compChoice={compChoice} />
+        <AnimationScreen p1choice={p1choice} compChoice={compChoice} reset={()=>{
+          setShowAnimation(true);
+        }}/>
       )}
     </ImageBackground>
   );
@@ -129,21 +131,7 @@ const AnimationScreen = props => {
       setShowResult(true);
     }, 3000);
   };
-  const timer2 = () => {
-    return (
-      <View>
-        <CountDown
-          until={4}
-          size={30}
-          onFinish={() => alert("Finished")}
-          digitStyle={{ backgroundColor: "#FFF" }}
-          digitTxtStyle={{ color: "#1CC625" }}
-          timeToShow={["S"]}
-          timeLabels={{ s: "SS" }}
-        />
-      </View>
-    );
-  };
+ 
   var mottos = [
     "If you want to achieve greatness stop asking for permission.",
     "Things work out best for those who make the best of how things work out.",
@@ -160,7 +148,10 @@ const AnimationScreen = props => {
   return (
     <PaperProvider>
       {showResult ? (
-        <ResultScreen p1choice={props.p1choice} compChoice={props.compChoice} />
+        <ResultScreen p1choice={props.p1choice} compChoice={props.compChoice} reset={props.reset}
+        goback={()=>{
+          setShowResult(false);
+        }}/>
       ) : (
         <View>
           <Appbar.Header
@@ -214,18 +205,18 @@ const AnimationScreen = props => {
 };
 //-----------------------------DONT CHANGE ANYTHING BELOW
 //-----------------------------------------------------------------------------------------------------------------------
-const ResultScreen = ({ p1choice, compChoice }) => {
-  console.log(p1choice);
+const ResultScreen = (props) => {
+  console.log(props);
   var result;
   return (
     <PaperProvider>
       <Appbar.Header dark={true}>
         <Appbar.Content title="Title" />
       </Appbar.Header>
-      <Text>{p1choice}</Text>
+      <Text>{props.p1choice}</Text>
       <Button
         onPress={() => {
-          RNRestart.Restart();
+          props.reset();
         }}
         title="Play Again"
       />
