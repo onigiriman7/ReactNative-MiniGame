@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from "react";
-import CountDown from "react-native-countdown-component";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  Button,
-  Image,
-  TouchableOpacity
-} from "react-native";
-import RNRestart from "react-native-restart";
+import React, { useState, useEffect, useRef } from "react";
+import { StyleSheet, Text, View, ImageBackground, Image } from "react-native";
 import {
   Provider as PaperProvider,
-  Appbar,
-  Card,
-  Title,
-  Paragraph,
-  Avatar,
   Button as Button2
 } from "react-native-paper";
+import DisplayImage from "./components/DisplayImage";
+import ResultImage from "./components/ResultImage";
+import CompButtons from "./components/CompButtons";
+import * as Animatable from "react-native-animatable";
+import * as Font from "expo-font";
 
 export default function App() {
   return (
@@ -29,113 +19,112 @@ export default function App() {
 }
 
 const Selection = () => {
-  //const [showP2, setShowP2] = useState(false);
   const [p1choice, setP1choice] = useState(0);
   const [showAnimation, setShowAnimation] = useState(true);
   const selectables = ["rock", "paper", "scissors"];
   const handleButtonClick = () => {
     setShowAnimation(false);
   };
-  // const choices = selectables.map(choice => (
-  //   <Button
-  //     title={choice}
-  //     onPress={() => {
-  //       handleButtonClick();
-  //       setP1choice(choice);
-  //     }}
-  //   />
-  // ));
+
   const compChoice = selectables[Math.floor(Math.random() * 3)];
 
   return (
     <ImageBackground
-      style={{ width: "100%", height: "100%", backgroundColor: "lightblue" }}
+      source={{
+        uri:
+          "https://lh3.googleusercontent.com/proxy/RpnDwk2TuUPjQhAB0P-GP3qH3U0uO1QrZHyfx1Qy33y854ZSkfQhIuYAh7DGeu3oODM-oVW7_XB9G7GpRPwbLyl91wPHHPSXJfslMPsq7D1ouUjTF7MjEBCl2iYd"
+      }}
+      style={{ width: "100%", height: "100%", zIndex: -999 }}
     >
       {showAnimation ? (
         <PaperProvider>
-          <Text style={{ textAlign: "center", fontSize: 20 }}>
-            Hey! It's Your Turn
-          </Text>
-          <Text style={{ textAlign: "center", fontSize: 40 }}>
-            Select Your Choice!!
-          </Text>
-
-          <Button2
-            icon={() => (
-              <Image
-                source={
-                  "https://www.stickpng.com/assets/images/580b585b2edbce24c47b26f6.png"
-                }
-                style={{
-                  width: "260px",
-                  height: "150px",
-                  marginLeft: "-110px"
-                }}
-              />
-            )}
+          <View
             style={{
-              position: "absolute",
-              top: "18%",
-              left: "15%",
-              width: "260px"
-            }}
-            onPress={() => {
-              handleButtonClick();
-              setP1choice(selectables[0]);
-            }}
-          ></Button2>
-
-          <Button2
-            icon={() => (
-              <Image
-                source={
-                  "https://previews.123rf.com/images/pitju/pitju1608/pitju160800028/61460939-curled-paper-corner-a4-format-with-transparent-background-for-shet-of-paper-page-design-with-curled-.jpg"
-                }
-                style={{
-                  width: "250px",
-                  height: "170px",
-                  marginLeft: "-108px"
-                }}
-              />
-            )}
-            style={{
-              position: "absolute",
-              top: "49%",
-              left: "33%",
-              width: "150px"
-            }}
-            onPress={() => {
-              handleButtonClick();
-              setP1choice(selectables[1]);
+              position: "relative"
             }}
           >
-            {" "}
-          </Button2>
-
-          <Button2
-            icon={() => (
-              <Image
-                source={
-                  "https://lh3.googleusercontent.com/proxy/jckHYSg3qMej-p9oFGMg02EBwyt3Pg62a669-LwC2oIGqpub4HbCuUZ-qULhwfzgajoWJB6SqAUTyqYB9Jwdqk0qpl9CR88ePKV5ucsKhBV_N9ykeiK5m55cyWVC03jc"
-                }
+            <Animatable.View
+              animation="pulse"
+              iterationCount="infinite"
+              easing="ease-out"
+              direction="alternate"
+            >
+              <Button2
+                icon={() => (
+                  <Image
+                    source={require("./images/stone-clip-3.png")}
+                    style={{ marginLeft: -48, width: 130, height: 130 }}
+                  />
+                )}
                 style={{
-                  width: "250px",
-                  height: "170px",
-                  marginLeft: "-108px"
+                  width: 130,
+                  marginTop: 70,
+                  left: "13%",
+                  marginLeft: 10
                 }}
-              />
-            )}
-            style={{
-              position: "absolute",
-              top: "77%",
-              left: "33%",
-              width: "150px"
-            }}
-            onPress={() => {
-              handleButtonClick();
-              setP1choice(selectables[2]);
-            }}
-          ></Button2>
+                onPress={() => {
+                  handleButtonClick();
+                  setP1choice(selectables[0]);
+                }}
+              ></Button2>
+            </Animatable.View>
+            <Animatable.View
+              animation="pulse"
+              iterationCount="infinite"
+              easing="ease-out"
+              direction="alternate"
+            >
+              <Button2
+                icon={() => (
+                  <Image
+                    source={{
+                      uri:
+                        "https://www.stickpng.com/assets/images/5887c26cbc2fc2ef3a186046.png"
+                    }}
+                    style={{ marginLeft: -45, width: 130, height: 120 }}
+                  />
+                )}
+                style={{
+                  paddingBottom: 20,
+                  width: 130,
+                  left: "55%",
+                  marginTop: 50
+                }}
+                onPress={() => {
+                  handleButtonClick();
+                  setP1choice(selectables[1]);
+                }}
+              ></Button2>
+            </Animatable.View>
+            <Animatable.View
+              animation="pulse"
+              iterationCount="infinite"
+              easing="ease-out"
+              direction="alternate"
+            >
+              <Button2
+                icon={() => (
+                  <Image
+                    source={require("./images/clipart-scissors-cartoon-14.png")}
+                    style={{
+                      marginLeft: -48,
+                      width: 130,
+                      height: 120
+                    }}
+                  />
+                )}
+                style={{
+                  width: 130,
+
+                  left: "13%"
+                }}
+                onPress={() => {
+                  handleButtonClick();
+                  setP1choice(selectables[2]);
+                }}
+              ></Button2>
+            </Animatable.View>
+          </View>
         </PaperProvider>
       ) : (
         <AnimationScreen
@@ -154,125 +143,129 @@ const AnimationScreen = props => {
   //images for scissors rock & paper
 
   const [showResult, setShowResult] = useState(false);
-  const timer = () => {
-    setTimeout(() => {
-      setShowResult(true);
-    }, 1000);
-  };
 
-  var mottos = [
-    "If you want to achieve greatness stop asking for permission.",
-    "Things work out best for those who make the best of how things work out.",
-    "To live a creative life, we must lose our fear of being wrong.",
-    "Trust because you are willing to accept the risk, not because it's safe or certain.",
-    "Just when the caterpillar thought the world was ending, he turned into a butterfly.",
-    "Great minds discuss ideas; average minds discuss events; small minds discuss people.",
-    "A successful man is one who can lay a firm foundation with the bricks others have thrown at him.",
-    "The ones who are crazy enough to think they can change the world, are the ones who do.",
-    "The meaning of life is to find your gift. The purpose of life is to give it away."
-  ];
+  useEffect(() => {
+    Font.loadAsync({
+      antonFont: require("./assets/fonts/Anton.ttf"),
+      "8bit": require("./assets/fonts/PressStart2P-Regular.ttf"),
+      geostar: require("./assets/fonts/GeostarFill-Regular.ttf")
+    });
+  }, []);
 
-  const randomMotto = mottos[Math.floor(Math.random() * mottos.length)];
   return (
     <PaperProvider>
       {showResult ? (
-        <ResultScreen
-          p1choice={props.p1choice}
-          compChoice={props.compChoice}
-          reset={props.reset}
-          goback={() => {
-            setShowResult(false);
+        <ImageBackground
+          source={{
+            uri:
+              "https://image.freepik.com/free-photo/blue-gradient-blurred-abstract-background_3248-2643.jpg"
           }}
-        />
+          style={{ width: "100%", height: "100%" }}
+        >
+          <ResultScreen
+            p1choice={props.p1choice}
+            compChoice={props.compChoice}
+            reset={props.reset}
+            goback={() => {
+              setShowResult(false);
+            }}
+          />
+        </ImageBackground>
       ) : (
-        <View>
-          <Card
-            style={{
-              marginTop: "130px",
-              position: "relative",
-              width: "100%",
-              padding: "10px",
-              height: "230px"
-            }}
+        <Animatable.View animation="fadeIn" easing="ease-in" duration={500}>
+          <ImageBackground
+            source={require("./images/83461e4c-5dda-47f7-a157-c5f9fc062eff.png")}
+            style={{ width: "100%", height: "100%" }}
           >
-            <Avatar.Image
-              style={{ position: "absolute", left: "35%" }}
-              size={114}
-              source={
-                "https://1.bp.blogspot.com/-c6JkYb7CMYk/VCs9OoGlvrI/AAAAAAAAAsY/pk05iUDSc4w/s1600/anzai-sensei.png"
-              }
-            />
-            <Card.Content style={{ position: "absolute", top: "67%" }}>
-              <Paragraph style={{ textAlign: "center", fontWeight: "900" }}>
-                {randomMotto}
-              </Paragraph>
-            </Card.Content>
-          </Card>
-          <Button2
-            style={{
-              width: "200px",
-              position: "absolute",
-              left: "26%",
-              marginTop: "450px"
-            }}
-            mode="contained"
-            onPress={() => {
-              timer();
-            }}
-          >
-            Check Result
-          </Button2>
-        </View>
+            <Animatable.View
+              animation="fadeInLeft"
+              easing="ease-in"
+              duration={500}
+              delay={500}
+            >
+              <Image
+                source={{
+                  uri:
+                    "https://thumbs.gfycat.com/UnfinishedDishonestAmericanriverotter-max-1mb.gif"
+                }}
+                style={{
+                  width: 300,
+                  height: 300,
+                  marginTop: -10,
+                  marginLeft: -100
+                }}
+              />
+            </Animatable.View>
+            <CompButtons />
+            <Animatable.View animation="bounceIn" easing="ease-in" delay={2500}>
+              <Button2
+                style={{
+                  left: "30%",
+                  marginTop: -45,
+                  width: 140,
+                  height: 140,
+                  backgroundColor: "red",
+                  borderRadius: 100,
+                  paddingTop: 55
+                }}
+                mode="contained"
+                onPress={() => {
+                  setShowResult(true);
+                }}
+              >
+                <Text style={{ fontSize: 20, fontFamily: "8bit" }}>FIGHT</Text>
+              </Button2>
+            </Animatable.View>
+          </ImageBackground>
+        </Animatable.View>
       )}
     </PaperProvider>
   );
 };
-//-----------------------------DONT CHANGE ANYTHING BELOW
-//-----------------------------------------------------------------------------------------------------------------------
 const ResultScreen = props => {
   var player = props.p1choice;
   var comp = props.compChoice;
   var resultTexts = ["DRAW", "Player wins", "Computer Wins"];
 
-  var result = () => {
-    if (player === comp) {
-      return 0;
-    } else {
-      switch (player) {
-        case "paper":
-          return comp === "rock" ? 1 : 2;
-
-        case "rock":
-          return comp === "scissors" ? 1 : 2;
-
-        case "scissors":
-          return comp === "paper" ? 1 : 2;
-      }
-    }
-  };
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text style={{ textAlign: "center", fontSize: 24 }}>
-        You selected: {player}
-      </Text>
-      <Text style={{ textAlign: "center", fontSize: 70, fontStyle: "italic" }}>
-        {resultTexts[result()]}
-      </Text>
-      <Text style={{ textAlign: "center", marginTop: "20px", fontSize: 24 }}>
-        Computer selected: {comp}
-      </Text>
+    <View>
+      <Text style={{ fontSize: 30, color: "transparent" }}>Hidden mEssage</Text>
+      <Animatable.View animation="fadeInDown" easing="ease-in" duration={500}>
+        <DisplayImage playerImage={player} />
+      </Animatable.View>
+      <Animatable.View
+        animation="bounceIn"
+        easing="ease-in"
+        duration={500}
+        delay={1000}
+      >
+        <ResultImage resText={resultTexts} player={player} comp={comp} />
+      </Animatable.View>
+      <Animatable.View animation="fadeInUp" easing="ease-in" duration={500}>
+        <DisplayImage compImage={comp} />
+      </Animatable.View>
+
       <Button2
-        style={{ position: "absolute", top: "74%", backgroundColor: "white" }}
+        style={{
+          left: "29%",
+          top: "10%",
+          width: 150,
+          backgroundColor: "red"
+        }}
+        mode="contained"
         onPress={() => {
           props.reset();
         }}
       >
-        Play Again
+        <Text style={{ fontFamily: "antonFont", fontSize: 20 }}>
+          {" "}
+          Play Again
+        </Text>
       </Button2>
     </View>
   );
 };
-// selection screen // animation audio screen // results screen
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -281,50 +274,3 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-
-/*
-const Rps = () =>{
-  const selectables = [
-    "paper",
-    "rock",
-    "scissors"
-  ]
-  const [p1choice, setP1choice] = useState("paper");
-  const [p2choice, setP2choice] = useState("paper");
-  
-  return(
-    <View>
-  <P1 selectables={selectables} handleChoice={choice => {
-      setP1choice(choice);
-    }}/>
-    <Text>{p1choice}</Text>
-    {
-      
-    }
-    <Text>{p2choice}</Text>
-    <P2 selectables={selectables} handleChoice={choice => {
-      setP2choice(choice);
-    }}/>
-    </View>
-  )
-}
-
-const P1 = (props) => {
-  const [selected,setSelected] = useState(props.selectables[0]);
-  
-  return(
-    <View style={styles.container}>
-      <Button title="paper" onPress={() => {props.handleChoice("paper")}}/><Button title="rock" onPress={() => {props.handleChoice("rock")}}/><Button title="scissors" onPress={() => {props.handleChoice("scissors")}} />
-    </View>
-  );
-}
-
-const P2 = (props) => {
-  const [selected,setSelected] = useState(props.selectables[0]);
-  return(
-    <View style={styles.container}>
-      <Button title="paper" onPress={() => {props.handleChoice("paper")}}/><Button title="rock" onPress={() => {props.handleChoice("rock")}} /><Button title="scissors" onPress={() => {props.handleChoice("scissors")}} />
-    </View>
-  );
-}
-*/
