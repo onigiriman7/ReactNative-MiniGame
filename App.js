@@ -32,7 +32,7 @@ const Selection = () => {
     <ImageBackground
       source={{
         uri:
-          "https://lh3.googleusercontent.com/proxy/RpnDwk2TuUPjQhAB0P-GP3qH3U0uO1QrZHyfx1Qy33y854ZSkfQhIuYAh7DGeu3oODM-oVW7_XB9G7GpRPwbLyl91wPHHPSXJfslMPsq7D1ouUjTF7MjEBCl2iYd"
+          "https://i.pinimg.com/originals/31/6a/4f/316a4f9b9e1bd431d425fdd210f9732f.gif"
       }}
       style={{ width: "100%", height: "100%", zIndex: -999 }}
     >
@@ -158,7 +158,7 @@ const AnimationScreen = props => {
         <ImageBackground
           source={{
             uri:
-              "https://image.freepik.com/free-photo/blue-gradient-blurred-abstract-background_3248-2643.jpg"
+              "https://i.pinimg.com/originals/31/6a/4f/316a4f9b9e1bd431d425fdd210f9732f.gif"
           }}
           style={{ width: "100%", height: "100%" }}
         >
@@ -201,10 +201,10 @@ const AnimationScreen = props => {
               <Button2
                 style={{
                   left: "30%",
-                  marginTop: -45,
+                  marginTop: -30,
                   width: 140,
                   height: 140,
-                  backgroundColor: "red",
+                  backgroundColor: "#FF4500",
                   borderRadius: 100,
                   paddingTop: 55
                 }}

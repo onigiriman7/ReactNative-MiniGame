@@ -39,7 +39,7 @@ const ResultImage = props => {
         <Image
           source={{
             uri:
-              "https://lh3.googleusercontent.com/proxy/CN1keLMhcAddaT4gSL72PgK4p62ApbL4RQTVnVdahWIWKrNZqMnLQ0w4ZXDQMc2qbQ3YL-X5vQdoo-f7Bfos3r9bBgjw60jmHPd3lz50mZY1sojAjsdJ"
+              "https://pngimage.net/wp-content/uploads/2018/06/lose-png-7.png"
           }}
           style={{ width: 150, height: 100, left: "28%", top: "28%" }}
         />
@@ -49,7 +49,7 @@ const ResultImage = props => {
         <Text
           style={{
             fontSize: 50,
-            top: "35%",
+            top: "45%",
             textAlign: "center",
             color: "white",
             fontFamily: "8bit"

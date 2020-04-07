@@ -1,15 +1,22 @@
 {
   "expo": {
-    "name": "RPS",
-    "slug": "RPS",
+    "name": "CoolestRPS",
+    "slug": "CoolestRPS",
     "privacy": "public",
     "sdkVersion": "36.0.0",
+    "android":{
+      "package":"com.pvproductions.coolestRPS",
+      "versionCode":1,
+      "permissions":[],
+      "icon":"./assets/icon.png"
+    },
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+   
     "splash": {
-      "image": "./assets/SplashLogo.jpeg",
+      "image": "https://logotypemaker.com/logo-previews/lr_ck8g00zkh00013vxv1dlqw7z9/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
